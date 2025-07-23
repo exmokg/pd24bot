@@ -50,20 +50,20 @@ from wbb.utils.functions import (
 )
 
 __MODULE__ = "Notes"
-__HELP__ = """/notes To Get All The Notes In The Chat.
+__HELP__ = """/notes Получить все заметки в чате.
 
-/save [NOTE_NAME] To Save A Note.
+/save [ИМЯ_ЗАМЕТКИ] Сохранить заметку.
 
-Supported note types are Text, Animation, Photo, Document, Video, video notes, Audio, Voice.
+Поддерживаемые типы заметок: Текст, Анимация, Фото, Документ, Видео, видео-заметки, Аудио, Голос.
 
-To change caption of any files use.\n/save [NOTE_NAME] [NEW_CAPTION].
+Для изменения подписи любых файлов используйте.\n/save [ИМЯ_ЗАМЕТКИ] [НОВАЯ_ПОДПИСЬ].
 
-#NOTE_NAME To Get A Note.
+#ИМЯ_ЗАМЕТКИ Получить заметку.
 
-/delete [NOTE_NAME] To Delete A Note.
-/deleteall To delete all the notes in a chat (permanently).
+/delete [ИМЯ_ЗАМЕТКИ] Удалить заметку.
+/deleteall Удалить все заметки в чате (навсегда).
 
-Checkout /markdownhelp to know more about formattings and other syntax.
+Изучите /markdownhelp чтобы узнать больше о форматировании и другом синтаксисе.
 """
 
 

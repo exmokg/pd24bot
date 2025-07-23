@@ -33,20 +33,20 @@ from wbb.utils.functions import get_urls_from_text
 
 __MODULE__ = "Locks"
 __HELP__ = """
-Commands: /lock | /unlock | /locks [No Parameters Required]
+Команды: /lock | /unlock | /locks [Параметры не требуются]
 
-Parameters:
+Параметры:
     messages | stickers | gifs | media | games | polls
 
     inline  | url | group_info | user_add | pin
 
-You can only pass the "all" parameter with /lock, not with /unlock
+Вы можете передать параметр "all" только с /lock, не с /unlock
 
-Example:
+Пример:
     /lock all
 """
 
-incorrect_parameters = "Incorrect Parameters, Check Locks Section In Help."
+incorrect_parameters = "Неверные параметры, проверьте раздел Блокировок в справке."
 # Using disable_preview as a switch for url checker
 # That way we won't need an additional db to check
 # If url lock is enabled/disabled for a chat
