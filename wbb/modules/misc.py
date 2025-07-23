@@ -40,61 +40,61 @@ from wbb.utils.pastebin import paste
 __MODULE__ = "Misc"
 __HELP__ = """
 /asq
-    Ask a question
+    Задать вопрос
 
 /commit
-    Generate Funny Commit Messages
+    Генерировать забавные сообщения коммитов
 
 /runs
-    Idk Test Yourself
+    Хз, проверь сам
 
 /id
-    Get Chat_ID or User_ID
+    Получить Chat_ID или User_ID
 
-/random [Length]
-    Generate Random Complex Passwords
+/random [Длина]
+    Генерировать случайные сложные пароли
 
-/cheat [Language] [Query]
-    Get Programming Related Help
+/cheat [Язык] [Запрос]
+    Получить помощь по программированию
 
-/tr [LANGUAGE_CODE]
-    Translate A Message
-    Ex: /tr en
+/tr [КОД_ЯЗЫКА]
+    Перевести сообщение
+    Пример: /tr en
 
 /json [URL]
-    Get parsed JSON response from a rest API.
+    Получить разобранный JSON ответ от REST API.
 
 /arq
-    Statistics Of ARQ API.
+    Статистика ARQ API.
 
-/webss | .webss [URL] [FULL_SIZE?, use (y|yes|true) to get full size image. (optional)]
-    Take A Screenshot Of A Webpage
+/webss | .webss [URL] [FULL_SIZE?, используйте (y|yes|true) для получения полноразмерного изображения. (опционально)]
+    Сделать скриншот веб-страницы
 
 /reverse
-    Reverse search an image.
+    Обратный поиск изображения.
 
 /carbon
-    Make Carbon from code.
+    Создать Carbon из кода.
 
 /tts
-    Convert Text To Speech.
+    Преобразовать текст в речь.
 
-/autocorrect [Reply to a message]
-    Autocorrects the text in replied message.
+/autocorrect [Ответ на сообщение]
+    Автоисправление текста в отвеченном сообщении.
 
-/pdf [Reply to an image (as document) or a group of images.]
-    Convert images to PDF, helpful for online classes.
+/pdf [Ответ на изображение (как документ) или группу изображений.]
+    Преобразовать изображения в PDF, полезно для онлайн-уроков.
 
 /markdownhelp
-    Sends mark down and formatting help.
+    Отправляет справку по разметке и форматированию.
 
 /backup
-    Backup database
+    Резервное копирование базы данных
 
 /ping
-    Check ping of all 5 DCs.
+    Проверить пинг всех 5 ДЦ.
     
-#RTFM - Tell noobs to read the manual
+#RTFM - Скажи новичкам прочитать руководство
 """
 
 ASQ_LOCK = Lock()
@@ -165,9 +165,9 @@ async def commit(_, message):
 async def rtfm(_, message):
     await message.delete()
     if not message.reply_to_message:
-        return await message.reply_text("Reply To A Message lol")
+        return await message.reply_text("Ответь на сообщение лол")
     await message.reply_to_message.reply_text(
-        "Are You Lost? READ THE FUCKING DOCS!"
+        "Ты заблудился? ЧИТАЙ БЛЯДСКИЕ ДОКУМЕНТЫ!"
     )
 
 
@@ -223,7 +223,7 @@ async def getid(client, message):
 async def random(_, message):
     if len(message.command) != 2:
         return await message.reply_text(
-            '"/random" Needs An Argurment.' " Ex: `/random 5`"
+            '"/random" требует аргумент.' " Пример: `/random 5`"
         )
     length = message.text.split(None, 1)[1]
     try:
@@ -234,10 +234,10 @@ async def random(_, message):
             )
             await message.reply_text(f"`{password}`")
         else:
-            await message.reply_text("Specify A Length Between 1-1000")
+            await message.reply_text("Укажите длину от 1 до 1000")
     except ValueError:
         await message.reply_text(
-            "Strings Won't Work!, Pass A Positive Integer Less Than 1000"
+            "Строки не подойдут! Введите положительное число меньше 1000"
         )
 
 
@@ -246,19 +246,19 @@ async def random(_, message):
 @capture_err
 async def tr(_, message):
     if len(message.command) != 2:
-        return await message.reply_text("/tr [LANGUAGE_CODE]")
+        return await message.reply_text("/tr [КОД_ЯЗЫКА]")
     lang = message.text.split(None, 1)[1]
     if not message.reply_to_message or not lang:
         return await message.reply_text(
-            "Reply to a message with /tr [language code]"
-            + "\nGet supported language list from here -"
+            "Ответьте на сообщение с /tr [код языка]"
+            + "\nПолучите список поддерживаемых языков здесь -"
             + " https://py-googletrans.readthedocs.io/en"
             + "/latest/#googletrans-languages"
         )
     reply = message.reply_to_message
     text = reply.text or reply.caption
     if not text:
-        return await message.reply_text("Reply to a text to translate it")
+        return await message.reply_text("Ответьте на текст для его перевода")
     result = await arq.translate(text, lang)
     if not result.ok:
         return await message.reply_text(result.result)
@@ -271,7 +271,7 @@ async def json_fetch(_, message):
     if len(message.command) != 2:
         return await message.reply_text("/json [URL]")
     url = message.text.split(None, 1)[1]
-    m = await message.reply_text("Fetching")
+    m = await message.reply_text("Получение")
     try:
         data = await get(url)
         data = await json_prettify(data)
