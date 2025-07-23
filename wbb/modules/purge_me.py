@@ -27,62 +27,62 @@ from pyrogram.types import Message
 
 from wbb import SUDOERS, USERBOT_ID, USERBOT_PREFIX, app2, eor, log, telegraph
 
-__MODULE__ = "Userbot"
+__MODULE__ = "Пользовательский бот"
 TEXT = """
-<code>alive</code>  →  Send Alive Message.<br>
+<code>alive</code>  →  Отправить сообщение о работе бота.<br>
 
-<code>create (b|s|c) Title</code>  →  create [basic|super]group & channel<br>
+<code>create (b|s|c) Title</code>  →  создать [обычную|супер]группу и канал<br>
 
-<code>chatbot [ENABLE|DISABLE]</code>  →  Enable chatbot in a chat.<br>
+<code>chatbot [ENABLE|DISABLE]</code>  →  Включить чатбот в чате.<br>
 
-<code>autocorrect [ENABLE|DISABLE]</code>  →  This will autocorrect your messages on the go.<br>
+<code>autocorrect [ENABLE|DISABLE]</code>  →  Автоматически исправлять ваши сообщения на лету.<br>
 
-<code>purgeme [Number of messages to purge]</code>  →  Purge your own messages.<br>
+<code>purgeme [Количество сообщений для удаления]</code>  →  Удалить ваши собственные сообщения.<br>
 
-<code>eval [Lines of code]</code>  →  Execute Python Code.<br>
+<code>eval [Строки кода]</code>  →  Выполнить Python код.<br>
 
-<code>lsTasks</code>  →  List running tasks (eval)<br>
+<code>lsTasks</code>  →  Список выполняющихся задач (eval)<br>
 
-<code>sh [Some shell code]</code>  →  Execute Shell Code.<br>
+<code>sh [Код оболочки]</code>  →  Выполнить Shell код.<br>
 
-<code>approve</code>  →  Approve a user to PM you.<br>
+<code>approve</code>  →  Одобрить пользователя для отправки личных сообщений.<br>
 
-<code>disapprove</code>  →  Disapprove a user to PM you.<br>
+<code>disapprove</code>  →  Отклонить пользователя для отправки личных сообщений.<br>
 
-<code>block</code>  →  Block a user.<br>
+<code>block</code>  →  Заблокировать пользователя.<br>
 
-<code>unblock</code>  →  Unblock a user.<br>
+<code>unblock</code>  →  Разблокировать пользователя.<br>
 
-<code>anonymize</code>  →  Change Name/PFP Randomly.<br>
+<code>anonymize</code>  →  Случайно изменить имя/аватар.<br>
 
-<code>impersonate [User_ID|Username|Reply]</code> → Clone profile of a user.<br>
+<code>impersonate [User_ID|Username|Reply]</code> → Клонировать профиль пользователя.<br>
 
-<code>useradd</code>  →  To add a user in sudoers. [UNSAFE]<br>
+<code>useradd</code>  →  Добавить пользователя в sudoers. [НЕБЕЗОПАСНО]<br>
 
-<code>userdel</code>  → To remove a user from sudoers.<br>
+<code>userdel</code>  → Удалить пользователя из sudoers.<br>
 
-<code>sudoers</code>  →  To list sudo users.<br>
+<code>sudoers</code>  →  Список sudo пользователей.<br>
 
-<code>download [URL or reply to a file]</code>  →  Download a file from TG or URL<br>
+<code>download [URL или ответ на файл]</code>  →  Скачать файл из TG или по URL<br>
 
-<code>upload [URL or File Path]</code>  →  Upload a file from local or URL<br>
+<code>upload [URL или путь к файлу]</code>  →  Загрузить файл с локального диска или по URL<br>
 
-<code>parse_preview [REPLY TO A MESSAGE]</code>  →  Parse a web_page(link) preview<br>
+<code>parse_preview [ОТВЕТ НА СООБЩЕНИЕ]</code>  →  Разобрать предварительный просмотр веб-страницы(ссылки)<br>
 
-<code>id</code>  →  Same as /id but for Ubot<br>
+<code>id</code>  →  То же что /id, но для Ubot<br>
 
-<code>paste</code> → Paste shit on batbin.<br>
+<code>paste</code> → Вставить на batbin.<br>
 
-<code>help</code> → Get link to this page.<br>
+<code>help</code> → Получить ссылку на эту страницу.<br>
 
-<code>kang</code> → Kang stickers.<br>
+<code>kang</code> → Украсть стикеры.<br>
 
-<code>dice</code> → Roll a dice.<br>
+<code>dice</code> → Бросить кубик.<br>
 """
 log.info("Pasting userbot commands on telegraph")
 
 __HELP__ = f"""**Commands:** {telegraph.create_page(
-    "Userbot Commands",
+    "Команды пользовательского бота",
     html_content=TEXT,
 )['url']}"""
 
@@ -115,12 +115,12 @@ async def purge_me_func(_, message: Message):
 
     n = message.text.split(None, 1)[1].strip()
     if not n.isnumeric():
-        return await eor(message, text="Invalid Args")
+        return await eor(message, text="Неверные аргументы")
 
     n = int(n)
 
     if n < 1:
-        return await eor(message, text="Need a number >=1")
+        return await eor(message, text="Нужно число >=1")
 
     chat_id = message.chat.id
 
@@ -134,7 +134,7 @@ async def purge_me_func(_, message: Message):
     ]
 
     if not message_ids:
-        return await eor(message, text="No messages found.")
+        return await eor(message, text="Сообщения не найдены.")
 
     # A list containing lists of 100 message chunks
     # because we can't delete more than 100 messages at once,
