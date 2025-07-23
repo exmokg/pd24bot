@@ -73,34 +73,34 @@ from wbb.utils.functions import (
 
 __MODULE__ = "Greetings"
 __HELP__ = """
-/captcha [ENABLE|DISABLE] - Enable/Disable captcha.
+/captcha [ENABLE|DISABLE] - Включить/Отключить капчу.
 
-/set_welcome - Reply this to a message containing correct
-format for a welcome message, check end of this message.
+/set_welcome - Ответьте этой командой на сообщение, содержащее правильный
+формат для приветственного сообщения, смотрите в конце этого сообщения.
 
-/del_welcome - Delete the welcome message.
-/get_welcome - Get the welcome message.
+/del_welcome - Удалить приветственное сообщение.
+/get_welcome - Получить приветственное сообщение.
 
-**SET_WELCOME ->**
+**УСТАНОВКА ПРИВЕТСТВИЯ ->**
 
-**To set a photo or gif as welcome message. Add your welcome message as caption to the photo or gif. The caption muse be in the format given below.**
+**Чтобы установить фото или gif как приветственное сообщение. Добавьте ваше приветственное сообщение как подпись к фото или gif. Подпись должна быть в формате, указанном ниже.**
 
-For text welcome message just send the text. Then reply with the command 
+Для текстового приветственного сообщения просто отправьте текст. Затем ответьте командой 
 
-The format should be something like below.
+Формат должен быть примерно таким:
 
 ```
-**Hi** {name} [{id}] Welcome to {chat}
+**Привет** {name} [{id}] Добро пожаловать в {chat}
 
-~ #This separater (~) should be there between text and buttons, remove this comment also
+~ #Этот разделитель (~) должен быть между текстом и кнопками, удалите этот комментарий также
 
 button=[Duck, https://duckduckgo.com]
 button2=[Github, https://github.com]
 ```
 
-**NOTES ->**
+**ЗАМЕТКИ ->**
 
-Checkout /markdownhelp to know more about formattings and other syntax.
+Изучите /markdownhelp чтобы узнать больше о форматировании и другом синтаксисе.
 """
 
 answers_dicc = []
@@ -413,7 +413,7 @@ async def _ban_restricted_user_until_date(
 @app.on_message(filters.command("captcha") & ~filters.private)
 @adminsOnly("can_restrict_members")
 async def captcha_state(_, message):
-    usage = "**Usage:**\n/captcha [ENABLE|DISABLE]"
+    usage = "**Использование:**\n/captcha [ENABLE|DISABLE]"
     if len(message.command) != 2:
         return await message.reply_text(usage)
 
@@ -422,10 +422,10 @@ async def captcha_state(_, message):
     state = state.lower()
     if state == "enable":
         await captcha_on(chat_id)
-        await message.reply_text("Enabled Captcha For New Users.")
+        await message.reply_text("Капча включена для новых пользователей.")
     elif state == "disable":
         await captcha_off(chat_id)
-        await message.reply_text("Disabled Captcha For New Users.")
+        await message.reply_text("Капча отключена для новых пользователей.")
     else:
         await message.reply_text(usage)
 
@@ -436,7 +436,7 @@ async def captcha_state(_, message):
 @app.on_message(filters.command("set_welcome") & ~filters.private)
 @adminsOnly("can_change_info")
 async def set_welcome_func(_, message):
-    usage = "You need to reply to a text, gif or photo to set it as greetings.\n\nNotes: caption required for gif and photo."
+    usage = "Вам нужно ответить на текст, gif или фото, чтобы установить его как приветствие.\n\nПримечания: подпись обязательна для gif и фото."
     key = InlineKeyboardMarkup(
         [
             [

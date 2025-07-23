@@ -24,13 +24,13 @@ from wbb.utils.rss import Feed
 
 __MODULE__ = "RSS"
 __HELP__ = f"""
-/add_feed [URL] - Add a feed to chat
-/rm_feed - Remove feed from chat
+/add_feed [URL] - Добавить фид в чат
+/rm_feed - Удалить фид из чата
 
-**Note:**
-    - This will check for updates every {RSS_DELAY // 60} minutes.
-    - You can only add one feed per chat.
-    - Currently RSS and ATOM feeds are supported.
+**Примечание:**
+    - Обновления проверяются каждые {RSS_DELAY // 60} минут.
+    - Вы можете добавить только один фид на чат.
+    - В настоящее время поддерживаются RSS и ATOM фиды.
 """
 
 

@@ -54,31 +54,31 @@ from wbb.utils.functions import (
 )
 
 __MODULE__ = "Admin"
-__HELP__ = """/ban - Ban A User
-/dban - Delete the replied message banning its sender
-/tban - Ban A User For Specific Time
-/unban - Unban A User
-/listban - Ban a user from groups listed in a message
-/listunban - Unban a user from groups listed in a message
-/warn - Warn A User
-/dwarn - Delete the replied message warning its sender
-/rmwarns - Remove All Warning of A User
-/warns - Show Warning Of A User
-/kick - Kick A User
-/dkick - Delete the replied message kicking its sender
-/purge - Purge Messages
-/purge [n] - Purge "n" number of messages from replied message
-/del - Delete Replied Message
-/promote - Promote A Member
-/fullpromote - Promote A Member With All Rights
-/demote - Demote A Member
-/pin - Pin A Message
-/mute - Mute A User
-/tmute - Mute A User For Specific Time
-/unmute - Unmute A User
-/ban_ghosts - Ban Deleted Accounts
-/report | @admins | @admin - Report A Message To Admins.
-/invite - Send Group/SuperGroup Invite Link."""
+__HELP__ = """/ban - Забанить пользователя
+/dban - Удалить сообщение и забанить отправителя
+/tban - Забанить пользователя на определенное время
+/unban - Разбанить пользователя
+/listban - Забанить пользователя в группах из списка в сообщении
+/listunban - Разбанить пользователя в группах из списка в сообщении
+/warn - Предупредить пользователя
+/dwarn - Удалить сообщение и предупредить отправителя
+/rmwarns - Удалить все предупреждения пользователя
+/warns - Показать предупреждения пользователя
+/kick - Исключить пользователя
+/dkick - Удалить сообщение и исключить отправителя
+/purge - Очистить сообщения
+/purge [n] - Очистить "n" количество сообщений от отвеченного сообщения
+/del - Удалить отвеченное сообщение
+/promote - Повысить участника
+/fullpromote - Повысить участника со всеми правами
+/demote - Понизить участника
+/pin - Закрепить сообщение
+/mute - Заглушить пользователя
+/tmute - Заглушить пользователя на определенное время
+/unmute - Снять заглушение с пользователя
+/ban_ghosts - Забанить удаленные аккаунты
+/report | @admins | @admin - Пожаловаться на сообщение администраторам.
+/invite - Отправить ссылку-приглашение группы/супергруппы."""
 
 
 async def member_permissions(chat_id: int, user_id: int):
@@ -159,7 +159,7 @@ async def purgeFunc(_, message: Message):
     await message.delete()
 
     if not repliedmsg:
-        return await message.reply_text("Reply to a message to purge from.")
+        return await message.reply_text("Ответьте на сообщение, с которого начать очистку.")
 
     cmd = message.command
     if len(cmd) > 1 and cmd[1].isdigit():
@@ -206,22 +206,22 @@ async def purgeFunc(_, message: Message):
 async def kickFunc(_, message: Message):
     user_id, reason = await extract_user_and_reason(message)
     if not user_id:
-        return await message.reply_text("I can't find that user.")
+        return await message.reply_text("Не могу найти этого пользователя.")
     if user_id == BOT_ID:
         return await message.reply_text(
-            "I can't kick myself, i can leave if you want."
+            "Не могу исключить себя, могу покинуть чат, если хотите."
         )
     if user_id in SUDOERS:
-        return await message.reply_text("You Wanna Kick The Elevated One?")
+        return await message.reply_text("Хочешь исключить Избранного?")
     if user_id in (await list_admins(message.chat.id)):
         return await message.reply_text(
-            "I can't kick an admin, You know the rules, so do i."
+            "Не могу исключить администратора. Ты знаешь правила, как и я."
         )
     mention = (await app.get_users(user_id)).mention
     msg = f"""
-**Kicked User:** {mention}
-**Kicked By:** {message.from_user.mention if message.from_user else 'Anon'}
-**Reason:** {reason or 'No Reason Provided.'}"""
+**Исключен пользователь:** {mention}
+**Исключил:** {message.from_user.mention if message.from_user else 'Аноним'}
+**Причина:** {reason or 'Причина не указана.'}"""
     if message.command[0][0] == "d":
         await message.reply_to_message.delete()
     await message.chat.ban_member(user_id)
@@ -242,18 +242,18 @@ async def banFunc(_, message: Message):
     user_id, reason = await extract_user_and_reason(message, sender_chat=True)
 
     if not user_id:
-        return await message.reply_text("I can't find that user.")
+        return await message.reply_text("Не могу найти этого пользователя.")
     if user_id == BOT_ID:
         return await message.reply_text(
-            "I can't ban myself, i can leave if you want."
+            "Не могу забанить себя, могу покинуть чат, если хотите."
         )
     if user_id in SUDOERS:
         return await message.reply_text(
-            "You Wanna Ban The Elevated One?, RECONSIDER!"
+            "Хочешь забанить Избранного?, ПОДУМАЙ ЕЩЕ РАЗ!"
         )
     if user_id in (await list_admins(message.chat.id)):
         return await message.reply_text(
-            "I can't ban an admin, You know the rules, so do i."
+            "Не могу забанить администратора. Ты знаешь правила, как и я."
         )
 
     try:
@@ -262,12 +262,12 @@ async def banFunc(_, message: Message):
         mention = (
             message.reply_to_message.sender_chat.title
             if message.reply_to_message
-            else "Anon"
+            else "Аноним"
         )
 
     msg = (
-        f"**Banned User:** {mention}\n"
-        f"**Banned By:** {message.from_user.mention if message.from_user else 'Anon'}\n"
+        f"**Забанен пользователь:** {mention}\n"
+        f"**Забанил:** {message.from_user.mention if message.from_user else 'Аноним'}\n"
     )
     if message.command[0][0] == "d":
         await message.reply_to_message.delete()
@@ -276,9 +276,9 @@ async def banFunc(_, message: Message):
         time_value = split[0]
         temp_reason = split[1] if len(split) > 1 else ""
         temp_ban = await time_converter(message, time_value)
-        msg += f"**Banned For:** {time_value}\n"
+        msg += f"**Забанен на:** {time_value}\n"
         if temp_reason:
-            msg += f"**Reason:** {temp_reason}"
+            msg += f"**Причина:** {temp_reason}"
         with suppress(AttributeError):
             if len(time_value[:-1]) < 3:
                 await message.chat.ban_member(user_id, until_date=temp_ban)
@@ -287,10 +287,10 @@ async def banFunc(_, message: Message):
                     message = replied_message
                 await message.reply_text(msg)
             else:
-                await message.reply_text("You can't use more than 99")
+                await message.reply_text("Нельзя использовать больше 99")
         return
     if reason:
-        msg += f"**Reason:** {reason}"
+        msg += f"**Причина:** {reason}"
     await message.chat.ban_member(user_id)
     replied_message = message.reply_to_message
     if replied_message:

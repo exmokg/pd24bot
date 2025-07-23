@@ -52,20 +52,20 @@ from wbb.utils.functions import (
 )
 
 __MODULE__ = "Filters"
-__HELP__ = """/filters To Get All The Filters In The Chat.
-/filter [FILTER_NAME] To Save A Filter(reply to a message).
+__HELP__ = """/filters Получить все фильтры в чате.
+/filter [ИМЯ_ФИЛЬТРА] Сохранить фильтр (ответить на сообщение).
 
-Supported filter types are Text, Animation, Photo, Document, Video, video notes, Audio, Voice.
+Поддерживаемые типы фильтров: Текст, Анимация, Фото, Документ, Видео, видео-заметки, Аудио, Голос.
 
-To use more words in a filter use.
-`/filter Hey_there` To filter "Hey there".
+Для использования нескольких слов в фильтре используйте:
+`/filter Привет_там` Для фильтрации "Привет там".
 
-/stop [FILTER_NAME] To Stop A Filter.
-/stopall To delete all the filters in a chat (permanently).
+/stop [ИМЯ_ФИЛЬТРА] Остановить фильтр.
+/stopall Удалить все фильтры в чате (навсегда).
 
-You can use markdown or html to save text too.
+Вы можете использовать markdown или html для сохранения текста также.
 
-Checkout /markdownhelp to know more about formattings and other syntax.
+Изучите /markdownhelp чтобы узнать больше о форматировании и другом синтаксисе.
 """
 
 

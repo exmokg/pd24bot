@@ -40,9 +40,9 @@ from wbb.utils.filter_groups import blacklist_filters_group
 
 __MODULE__ = "Blacklist"
 __HELP__ = """
-/blacklisted - Get All The Blacklisted Words In The Chat.
-/blacklist [WORD|SENTENCE] - Blacklist A Word Or A Sentence.
-/whitelist [WORD|SENTENCE] - Whitelist A Word Or A Sentence.
+/blacklisted - Получить все заблокированные слова в чате.
+/blacklist [СЛОВО|ПРЕДЛОЖЕНИЕ] - Заблокировать слово или предложение.
+/whitelist [СЛОВО|ПРЕДЛОЖЕНИЕ] - Разблокировать слово или предложение.
 """
 
 
@@ -50,15 +50,15 @@ __HELP__ = """
 @adminsOnly("can_restrict_members")
 async def save_filters(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("Usage:\n/blacklist [WORD|SENTENCE]")
+        return await message.reply_text("Использование:\n/blacklist [СЛОВО|ПРЕДЛОЖЕНИЕ]")
     word = message.text.split(None, 1)[1].strip()
     if not word:
         return await message.reply_text(
-            "**Usage**\n__/blacklist [WORD|SENTENCE]__"
+            "**Использование**\n__/blacklist [СЛОВО|ПРЕДЛОЖЕНИЕ]__"
         )
     chat_id = message.chat.id
     await save_blacklist_filter(chat_id, word)
-    await message.reply_text(f"__**Blacklisted {word}.**__")
+    await message.reply_text(f"__**Заблокировано {word}.**__")
 
 
 @app.on_message(filters.command("blacklisted") & ~filters.private)
@@ -66,9 +66,9 @@ async def save_filters(_, message):
 async def get_filterss(_, message):
     data = await get_blacklisted_words(message.chat.id)
     if not data:
-        await message.reply_text("**No blacklisted words in this chat.**")
+        await message.reply_text("**Нет заблокированных слов в этом чате.**")
     else:
-        msg = f"List of blacklisted words in {message.chat.title} :\n"
+        msg = f"Список заблокированных слов в {message.chat.title} :\n"
         for word in data:
             msg += f"**-** `{word}`\n"
         await message.reply_text(msg)
@@ -78,15 +78,15 @@ async def get_filterss(_, message):
 @adminsOnly("can_restrict_members")
 async def del_filter(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("Usage:\n/whitelist [WORD|SENTENCE]")
+        return await message.reply_text("Использование:\n/whitelist [СЛОВО|ПРЕДЛОЖЕНИЕ]")
     word = message.text.split(None, 1)[1].strip()
     if not word:
-        return await message.reply_text("Usage:\n/whitelist [WORD|SENTENCE]")
+        return await message.reply_text("Использование:\n/whitelist [СЛОВО|ПРЕДЛОЖЕНИЕ]")
     chat_id = message.chat.id
     deleted = await delete_blacklist_filter(chat_id, word)
     if deleted:
-        return await message.reply_text(f"**Whitelisted {word}.**")
-    await message.reply_text("**No such blacklist filter.**")
+        return await message.reply_text(f"**Разблокировано {word}.**")
+    await message.reply_text("**Такого заблокированного фильтра нет.**")
 
 
 @app.on_message(filters.text & ~filters.private, group=blacklist_filters_group)

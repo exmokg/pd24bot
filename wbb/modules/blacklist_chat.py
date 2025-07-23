@@ -11,14 +11,14 @@ from wbb.utils.dbfunctions import (
 
 __MODULE__ = "Blacklist Chat"
 __HELP__ = """
-**THIS MODULE IS ONLY FOR DEVS**
+**ЭТОТ МОДУЛЬ ТОЛЬКО ДЛЯ РАЗРАБОТЧИКОВ**
 
-Use this module to make the bot leave some chats
-in which you don't want it to be in.
+Используйте этот модуль, чтобы заставить бота покинуть некоторые чаты,
+в которых вы не хотите, чтобы он находился.
 
-/blacklist_chat [CHAT_ID] - Blacklist a chat.
-/whitelist_chat [CHAT_ID] - Whitelist a chat.
-/blacklisted - Show blacklisted chats.
+/blacklist_chat [CHAT_ID] - Заблокировать чат.
+/whitelist_chat [CHAT_ID] - Разблокировать чат.
+/blacklisted - Показать заблокированные чаты.
 """
 
 

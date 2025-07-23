@@ -30,9 +30,9 @@ from wbb.core.decorators.permissions import adminsOnly
 
 __MODULE__ = "Admin Miscs"
 __HELP__ = """
-/set_chat_title - Change The Name Of A Group/Channel.
-/set_chat_photo - Change The PFP Of A Group/Channel.
-/set_user_title - Change The Administrator Title Of An Admin.
+/set_chat_title - Изменить название группы/канала.
+/set_chat_photo - Изменить аватар группы/канала.
+/set_user_title - Изменить звание администратора.
 """
 
 
@@ -40,12 +40,12 @@ __HELP__ = """
 @adminsOnly("can_change_info")
 async def set_chat_title(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/set_chat_title NEW NAME")
+        return await message.reply_text("**Использование:**\n/set_chat_title НОВОЕ НАЗВАНИЕ")
     old_title = message.chat.title
     new_title = message.text.split(None, 1)[1]
     await message.chat.set_title(new_title)
     await message.reply_text(
-        f"Successfully Changed Group Title From {old_title} To {new_title}"
+        f"Успешно изменено название группы с {old_title} на {new_title}"
     )
 
 
@@ -54,22 +54,22 @@ async def set_chat_title(_, message):
 async def set_user_title(_, message):
     if not message.reply_to_message:
         return await message.reply_text(
-            "Reply to user's message to set his admin title"
+            "Ответьте на сообщение пользователя, чтобы установить его звание администратора"
         )
     if not message.reply_to_message.from_user:
         return await message.reply_text(
-            "I can't change admin title of an unknown entity"
+            "Не могу изменить звание администратора неизвестной сущности"
         )
     chat_id = message.chat.id
     from_user = message.reply_to_message.from_user
     if len(message.command) < 2:
         return await message.reply_text(
-            "**Usage:**\n/set_user_title NEW ADMINISTRATOR TITLE"
+            "**Использование:**\n/set_user_title НОВОЕ ЗВАНИЕ АДМИНИСТРАТОРА"
         )
     title = message.text.split(None, 1)[1]
     await app.set_administrator_title(chat_id, from_user.id, title)
     await message.reply_text(
-        f"Successfully Changed {from_user.mention}'s Admin Title To {title}"
+        f"Успешно изменено звание администратора {from_user.mention} на {title}"
     )
 
 

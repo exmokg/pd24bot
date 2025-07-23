@@ -43,16 +43,16 @@ approvaldb = db.autoapprove
 
 __MODULE__ = "Autoapprove"
 __HELP__ = """
-command: /autoapprove
+команда: /autoapprove
 
-This module helps to automatically accept chat join request send by a user through invitation link of your group
+Этот модуль помогает автоматически принимать запросы на вступление в чат, отправленные пользователем через ссылку-приглашение вашей группы
 
-**Modes:**
-¤ Automatic - Automatically accepts chat join request.
+**Режимы:**
+¤ Автоматический - Автоматически принимает запросы на вступление в чат.
 
-¤ Manual - A message will be send to the chat by tagging the admins. The admins can accept or decline the requests.
+¤ Ручной - Сообщение будет отправлено в чат с упоминанием администраторов. Администраторы могут принять или отклонить запросы.
 
-Use: /clear_pending Command to remove all pending user ID from DB. This will allow the user to send request again.
+Используйте: /clear_pending команда для удаления всех ожидающих ID пользователей из БД. Это позволит пользователю отправить запрос снова.
 """
 
 
